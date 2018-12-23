@@ -27,7 +27,7 @@ Print a single line of  space-separated integers denoting the final state of the
 
 ============================================================================================
 
-public class Solution {
+
 
     // Complete the rotLeft function below.
     static int[] rotLeft(int[] a, int d) {
