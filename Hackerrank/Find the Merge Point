@@ -1,0 +1,61 @@
+Given pointers to the head nodes of  linked lists that merge together at some point, find the Node where the two lists merge. It is guaranteed that the two head Nodes will be different, and neither will be NULL.
+
+In the diagram below, the two lists converge at Node x:
+
+[List #1] a--->b--->c
+                     \
+                      x--->y--->z--->NULL
+                     /
+     [List #2] p--->q
+Complete the int findMergeNode(SinglyLinkedListNode* head1, SinglyLinkedListNode* head2) method so that it finds and returns the data value of the Node where the two lists merge.
+
+Input Format
+
+Do not read any input from stdin/console.
+
+The findMergeNode(SinglyLinkedListNode,SinglyLinkedListNode) method has two parameters,  and , which are the non-null head Nodes of two separate linked lists that are guaranteed to converge.
+
+Constraints
+
+The lists will merge. 
+. 
+ .
+
+Output Format
+
+Do not write any output to stdout/console.
+
+Each Node has a data field containing an integer. Return the integer data for the Node where the two lists merge.
+
+Sample Input
+
+The diagrams below are graphical representations of the lists that input Nodes  and  are connected to. Recall that this is a method-only challenge; the method only has initial visibility to those  Nodes and must explore the rest of the Nodes using some algorithm of your own design.
+
+============================================================================================
+
+Solution:
+
+static int calculateLength(SinglyLinkedListNode node){
+        int len=0;
+        while(node!=null){
+            len++;
+            node=node.next;
+        }
+        return len;
+    }
+
+    static int findMergeNode(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
+        int len1=0,len2=0;
+        SinglyLinkedListNode i, j;
+        len1=calculateLength(head1);
+        len2=calculateLength(head2);
+        i=len1>=len2?head1:head2;
+        j=len1<len2?head1:head2;
+        for(int k=0;k<Math.abs(len1-len2);k++) i=i.next;
+        while(i!=null && j!=null){
+            if(i==j) return i.data;
+            i=i.next;
+            j=j.next;
+        }
+        return -1;
+    }
